@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from shorten.controller import shortenController
 from database.connect import engine
-from url.model import Base
+from url import Base
 
 Base.metadata.create_all(bind=engine)
 
