@@ -12,7 +12,7 @@ service = ShortenService()
   description='Redirect to the original URL using the shortened key'
 )
 def getUrl(short_key: str):
-  url = service.getUrl(short_key)
+  url: str = service.getUrl(short_key)
   if url == '':
     raise HTTPException(404, detail=f"Not found the key {short_key}")
   return RedirectResponse(url=url, status_code=301)
@@ -24,13 +24,13 @@ def getUrl(short_key: str):
   description='Transform the received long URL into a unique shortened key and store it in the database'
 )
 def createShorten(requestUrlDto: RequestUrlDto) -> ResponseUrlDto:
-  url = requestUrlDto.url
+  url: str = requestUrlDto.url
   
-  short_key = service.getUrlKey(url=url)
+  short_key: str = service.getUrlKey(url=url)
   
   if short_key == '':
     shortUrl = service.addShortenUrl(url)
   
-  responseUrlDto = ResponseUrlDto(short_url=shortUrl) if short_key == '' else ResponseUrlDto(short_url=short_key)
+  responseUrlDto: ResponseUrlDto = ResponseUrlDto(short_url=shortUrl if short_key == '' else short_key)
 
   return responseUrlDto

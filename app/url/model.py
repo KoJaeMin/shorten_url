@@ -1,7 +1,5 @@
 from sqlalchemy import Column, String
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from database import Base
 
 class Url(Base):
   __tablename__ = "url"
